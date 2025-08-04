@@ -1,5 +1,7 @@
-import {base_url, period_month} from "../utils/constants.ts";
+import {characters, defaultHero, period_month} from "../utils/constants.ts";
 import {useEffect, useState} from "react";
+import {useParams} from "react-router";
+
 interface InfoProps {
     name: string;
     gender: string;
@@ -13,12 +15,17 @@ interface InfoProps {
 
 const AboutMe = () => {
     const [hero, setHero] = useState<InfoProps>();
+    let {heroId = defaultHero} = useParams();
+
     useEffect(() => {
-        const hero = JSON.parse(localStorage.getItem("hero")!);
+        if(!(heroId in characters)){
+            heroId = defaultHero;
+        }
+        const hero = JSON.parse(localStorage.getItem("heroId")!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
         } else {
-            fetch(`${base_url}/v1/peoples/1`)
+            fetch(characters[heroId].url)
                 .then(response => response.json())
                 .then(data => {
                     const info: InfoProps = {
@@ -32,7 +39,7 @@ const AboutMe = () => {
                         eye_color: data.eye_color
                     }
                     setHero(info);
-                    localStorage.setItem("hero", JSON.stringify({
+                    localStorage.setItem("heroId", JSON.stringify({
                         payload: info,
                         timestamp: Date.now()
                     }));
