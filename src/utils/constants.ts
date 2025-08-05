@@ -14,8 +14,6 @@ export const base_url = 'https://sw-info-api.herokuapp.com';
 export const version = '/v1';
 
 
-
-export const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9];
 export const characters: Characters = {
     luke: {
         name: "Luke Skywalker",
@@ -68,6 +66,7 @@ export const characters: Characters = {
         url: `${base_url + version}/transports/10`
     }
 };
+export const friends = Object.keys(characters);
 export const defaultHero = 'luke';
 export const navItems = ['Home', 'About me', 'Star Wars', 'Contact'];
 export const period_month = 30 * 24 * 60 * 60 * 1000;
