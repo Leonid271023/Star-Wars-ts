@@ -1,4 +1,5 @@
-import {characters} from "../utils/constants.ts";
+import {characters, navItems} from "../utils/constants.ts";
+import {NavLink} from "react-router";
 
 interface FriendProps {
     friend: string;
@@ -14,8 +15,10 @@ const Friend = ({friend, pos}:FriendProps) => {
         styles += 'rounded-br-2xl';
     }
     return (
+        <NavLink to={`/${navItems[0]}/${friend}`}>
         <img className={styles} src={characters[friend].img} alt={characters[friend].img}/>
-    );
+        </NavLink>
+            );
 };
 
 export default Friend;
