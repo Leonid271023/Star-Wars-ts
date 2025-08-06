@@ -6,17 +6,8 @@ import {useErrorPage} from "../hooks/useErrorPage.tsx";
 
 const Home = () => {
     const {isError} = useErrorPage();
-    // const {heroId = defaultHero} = useParams();
-    // const {changeHero} = useContext(SWContext);
-    //
-    // useEffect(() => {
-    //     if (!(heroId in characters)) {
-    //         return;
-    //     }
-    //     changeHero(heroId);
-    // }, [heroId])
 
-    return (isError) ? (
+    return !isError ? (
         <main>
             <Hero/>
             <DreamTeam/>
